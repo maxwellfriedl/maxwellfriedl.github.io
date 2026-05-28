@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxwell Friedl — Digital Media &amp; Content Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1B3A5C;
+    --blue:   #2E6DA4;
+    --blue2:  #3d85c0;
+    --light:  #EAF2FB;
+    --light2: #d5e8f5;
+    --white:  #ffffff;
+    --offwhite: #f8fafc;
+    --gray:   #4a5568;
+    --midgray:#718096;
+    --border: #d0dce8;
+    --rule:   #2E6DA4;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--gray);
+    background: var(--white);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { color: var(--navy); }
+
+  /* ── UTILITY ───────────────────────────────────────── */
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 90px 0; }
+  .section-label {
+    font-family: var(--font-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+  .divider {
+    width: 48px; height: 3px;
+    background: var(--blue);
+    margin-bottom: 2.5rem;
+    border-radius: 2px;
+  }
+
+  /* fade-in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── NAV ───────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(27,58,92,0.08); }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .nav-logo {
+    font-family: var(--font-head);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--blue); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--gray);
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--blue); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--navy);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 1rem 2rem 1.5rem;
+    gap: 1.25rem;
+  }
+  .mobile-nav a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .mobile-nav.open { display: flex; }
+
+  /* ── HERO ──────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(145deg, var(--offwhite) 0%, var(--light) 55%, var(--light2) 100%);
+    position: relative;
+    overflow: hidden;
+    padding-top: 64px;
+  }
+  .hero-bg-shape {
+    position: absolute;
+    right: -120px; top: 50%;
+    transform: translateY(-50%);
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: rgba(46,109,164,0.07);
+    pointer-events: none;
+  }
+  .hero-bg-shape2 {
+    position: absolute;
+    right: 60px; top: 30%;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(27,58,92,0.05);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--blue);
+    color: white;
+    font-family: var(--font-head);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 3px;
+    margin-bottom: 1.25rem;
+  }
+  .hero-name {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .hero-name .accent { color: var(--blue); }
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--midgray);
+    font-weight: 300;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.65;
+  }
+  .hero-tagline strong { color: var(--gray); font-weight: 500; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--navy);
+    color: white;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 13px 28px;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--blue); color: white; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--navy);
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 13px 28px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: var(--navy); color: white; transform: translateY(-1px); }
+
+  /* ── ABOUT ─────────────────────────────────────────── */
+  #about { background: var(--white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-text p { color: var(--gray); margin-bottom: 1rem; line-height: 1.8; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .about-card h3 {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--blue);
+    display: inline-block;
+  }
+  .about-stat {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .about-stat:last-child { margin-bottom: 0; }
+  .about-stat-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .about-stat-text { font-size: 0.9rem; color: var(--gray); line-height: 1.5; }
+  .about-stat-text strong { color: var(--navy); font-weight: 500; }
+
+  /* ── PORTFOLIO ─────────────────────────────────────── */
+  #portfolio { background: var(--offwhite); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .portfolio-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(27,58,92,0.1);
+    border-color: var(--blue2);
+  }
+  .portfolio-card:hover::before { transform: scaleX(1); }
+  .card-icon {
+    width: 48px; height: 48px;
+    background: var(--light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+  }
+  .card-title {
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--midgray);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--blue);
+    transition: gap 0.2s;
+  }
+  .card-link:hover { gap: 10px; color: var(--navy); }
+  .card-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ── SKILLS ────────────────────────────────────────── */
+  #skills { background: var(--navy); }
+  #skills .section-label { color: var(--light2); }
+  #skills .section-title { color: white; }
+  #skills .divider { background: var(--blue2); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: background 0.2s;
+  }
+  .skill-item:hover { background: rgba(255,255,255,0.1); }
+  .skill-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .skill-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.35;
+  }
+
+  /* ── EXPERIENCE ────────────────────────────────────── */
+  #experience { background: var(--white); }
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .exp-group-title {
+    font-family: var(--font-head);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .exp-item { margin-bottom: 1.5rem; padding-left: 1rem; border-left: 2px solid var(--border); transition: border-color 0.2s; }
+  .exp-item:hover { border-color: var(--blue); }
+  .exp-item:last-child { margin-bottom: 0; }
+  .exp-title { font-weight: 600; color: var(--navy); font-size: 0.95rem; line-height: 1.3; margin-bottom: 2px; }
+  .exp-org { font-size: 0.85rem; color: var(--blue); font-weight: 500; margin-bottom: 2px; }
+  .exp-dates { font-size: 0.8rem; color: var(--midgray); font-style: italic; }
+
+  /* ── CONTACT ───────────────────────────────────────── */
+  #contact { background: var(--light); }
+  .contact-inner {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .contact-inner .section-title { margin-bottom: 0.75rem; }
+  .contact-inner p { color: var(--midgray); margin-bottom: 2.5rem; }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--navy);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { background: var(--navy); color: white; border-color: var(--navy); transform: translateY(-2px); }
+  .contact-link svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ── FOOTER ────────────────────────────────────────── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.82rem;
+  }
+  footer a { color: rgba(255,255,255,0.7); }
+
+  /* ── RESPONSIVE ────────────────────────────────────── */
+  /* ── RESUME PAGE ───────────────────────────────────── */
+  #resume { background: var(--offwhite); }
+  .resume-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem 3.5rem;
+  }
+  .resume-header {
+    text-align: center;
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .resume-name {
+    font-family: var(--font-head);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+  .resume-contact-line {
+    font-size: 0.85rem;
+    color: var(--midgray);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.75rem;
+  }
+  .resume-contact-line a { color: var(--blue); }
+  .resume-summary {
+    background: var(--light);
+    border-left: 3px solid var(--blue);
+    padding: 0.9rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.88rem;
+    color: var(--gray);
+    font-style: italic;
+    line-height: 1.65;
+  }
+  .resume-section-head {
+    font-family: var(--font-head);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--blue);
+    border-bottom: 1.5px solid var(--border);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem;
+    margin-top: 1.75rem;
+  }
+  .resume-job { margin-bottom: 1.2rem; }
+  .resume-job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .resume-job-title { font-weight: 600; color: var(--navy); font-size: 0.93rem; }
+  .resume-job-dates { font-size: 0.8rem; color: var(--midgray); font-style: italic; white-space: nowrap; }
+  .resume-job-org { font-size: 0.84rem; color: var(--blue); font-weight: 500; margin-bottom: 0.4rem; }
+  .resume-bullets { padding-left: 1.1rem; margin-top: 0.3rem; }
+  .resume-bullets li {
+    font-size: 0.86rem;
+    color: var(--gray);
+    margin-bottom: 0.2rem;
+    line-height: 1.55;
+  }
+  .resume-bullets li::marker { color: var(--blue); }
+  .resume-skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.15rem 2rem;
+  }
+  .resume-skills-grid li {
+    font-size: 0.86rem;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+  .resume-skills-grid li::marker { color: var(--blue); }
+  .edu-line {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: baseline;
+  }
+  .edu-school { font-weight: 600; color: var(--navy); font-size: 0.93rem; }
+  .edu-date { font-size: 0.8rem; color: var(--midgray); font-style: italic; }
+  .edu-degree { font-size: 0.86rem; color: var(--gray); margin-top: 0.15rem; }
+  @media (max-width: 640px) {
+    .resume-wrap { padding: 1.5rem 1.25rem; }
+    .resume-skills-grid { grid-template-columns: 1fr; }
+    .resume-name { font-size: 1.8rem; }
+  }
+
+    .section { padding: 60px 0; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .exp-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-bg-shape, .hero-bg-shape2 { display: none; }
+  }
+  @media (max-width: 480px) {
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Max<span>.</span>Friedl</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#about">About</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-shape2"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Milwaukee, WI &nbsp;·&nbsp; Open to Work</div>
+      <h1 class="hero-name">Maxwell<br><span class="accent">Friedl</span></h1>
+      <p class="hero-tagline">
+        Creative professional with a background in <strong>digital media, internet culture, and content strategy.</strong>
+        Video editing, image design, social media — done with purpose.
+      </p>
+      <div class="hero-ctas">
+        <a href="#portfolio" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label reveal">About Me</p>
+        <h2 class="section-title reveal">Digital Arts grad who lives<br>for creative work.</h2>
+        <div class="divider reveal"></div>
+        <p class="reveal">
+          I graduated from the University of Wisconsin–Milwaukee with a Bachelor's in
+          Digital Arts and Culture and a minor in Journalism, Advertising, and Media Studies.
+          My degree covered everything from internet culture and digital storytelling to
+          content strategy and social media — alongside hands-on work in Adobe Premiere Pro and Photoshop.
+        </p>
+        <p class="reveal reveal-delay-1">
+          Over the years I've edited videos, designed thumbnails and logos, run social media accounts,
+          operated cameras for live ESPN+ streams, and worked with content creators and brands as a freelancer.
+          I'm at my best when creativity meets strategy.
+        </p>
+        <p class="reveal reveal-delay-2">
+          I'm actively seeking a full-time role in video production, social media, content creation,
+          or digital design where I can put these skills to full use.
+        </p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="about-card">
+          <h3>Quick Facts</h3>
+          <div class="about-stat">
+            <div class="about-stat-dot"></div>
+            <div class="about-stat-text"><strong>Degree:</strong> B.A. Digital Arts &amp; Culture, UWM — May 2023</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-dot"></div>
+            <div class="about-stat-text"><strong>Minor:</strong> Journalism, Advertising &amp; Media Studies</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-dot"></div>
+            <div class="about-stat-text"><strong>Tools:</strong> Adobe Premiere Pro, Photoshop, Illustrator, Canva</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-dot"></div>
+            <div class="about-stat-text"><strong>Experience:</strong> Video editing, live production, social media, freelance design</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-dot"></div>
+            <div class="about-stat-text"><strong>Location:</strong> Milwaukee, WI — open to hybrid/remote</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-dot"></div>
+            <div class="about-stat-text"><strong>Freelancing since:</strong> 2016</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="section">
+  <div class="container">
+    <p class="section-label reveal">Portfolio</p>
+    <h2 class="section-title reveal">Selected Work</h2>
+    <div class="divider reveal"></div>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card reveal">
+        <div class="card-icon">🎬</div>
+        <div class="card-title">Podcast Edit Reel</div>
+        <div class="card-desc">
+          Short-form video edits clipped from the Crash Dummies Podcast for TikTok,
+          Instagram Reels, and YouTube Shorts — cut using Adobe Premiere Pro.
+        </div>
+        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/podcast-edit-reel" target="_blank" rel="noopener" class="card-link">
+          View reel
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="portfolio-card reveal reveal-delay-1">
+        <div class="card-icon">🖼️</div>
+        <div class="card-title">Thumbnail Collection</div>
+        <div class="card-desc">
+          YouTube thumbnails designed for friends and online influencers using
+          Adobe Photoshop and Illustrator — built to grab attention and drive clicks.
+        </div>
+        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/thumbnail-collection" target="_blank" rel="noopener" class="card-link">
+          View thumbnails
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="portfolio-card reveal reveal-delay-2">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">Freelance Design Work</div>
+        <div class="card-desc">
+          Logos, YouTube banners, cover art, and flyers designed for clients and friends
+          since 2016 — a mix of Photoshop, Illustrator, and Canva projects.
+        </div>
+        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/freelance-work-1" target="_blank" rel="noopener" class="card-link">
+          View freelance work
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="portfolio-card reveal reveal-delay-3">
+        <div class="card-icon">📚</div>
+        <div class="card-title">Student Projects</div>
+        <div class="card-desc">
+          Academic work from UWM's Digital Arts &amp; Culture program — covering digital
+          storytelling, social media strategy, content creation, and more.
+        </div>
+        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/student-projects" target="_blank" rel="noopener" class="card-link">
+          View projects
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="container">
+    <p class="section-label reveal">What I Bring</p>
+    <h2 class="section-title reveal">Skills &amp; Tools</h2>
+    <div class="divider reveal"></div>
+    <div class="skills-grid">
+      <div class="skill-item reveal">
+        <span class="skill-icon">🎞️</span>
+        <span class="skill-name">Adobe Premiere Pro</span>
+      </div>
+      <div class="skill-item reveal reveal-delay-1">
+        <span class="skill-icon">🖌️</span>
+        <span class="skill-name">Adobe Photoshop</span>
+      </div>
+      <div class="skill-item reveal reveal-delay-2">
+        <span class="skill-icon">✏️</span>
+        <span class="skill-name">Adobe Illustrator</span>
+      </div>
+      <div class="skill-item reveal reveal-delay-3">
+        <span class="skill-icon">🟦</span>
+        <span class="skill-name">Canva</span>
+      </div>
+      <div class="skill-item reveal">
+        <span class="skill-icon">📱</span>
+        <span class="skill-name">Social Media Strategy</span>
+      </div>
+      <div class="skill-item reveal reveal-delay-1">
+        <span class="skill-icon">📹</span>
+        <span class="skill-name">Live Video Production</span>
+      </div>
+      <div class="skill-item reveal reveal-delay-2">
+        <span class="skill-icon">🌐</span>
+        <span class="skill-name">Internet Culture &amp; Trends</span>
+      </div>
+      <div class="skill-item reveal reveal-delay-3">
+        <span class="skill-icon">✂️</span>
+        <span class="skill-name">Short-Form Video Editing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <p class="section-label reveal">Background</p>
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="divider reveal"></div>
+    <div class="exp-grid">
+      <div class="reveal">
+        <div class="exp-group-title">Video &amp; Production</div>
+        <div class="exp-item">
+          <div class="exp-title">Multimedia Assistant</div>
+          <div class="exp-org">UWM Athletics — ESPN+</div>
+          <div class="exp-dates">Aug 2021 – Feb 2023</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Video Editor</div>
+          <div class="exp-org">Crash Dummies Podcast</div>
+          <div class="exp-dates">Mar 2023 – Apr 2023</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Freelance Video &amp; Image Design</div>
+          <div class="exp-org">Self-employed</div>
+          <div class="exp-dates">2016 – Present</div>
+        </div>
+        <br>
+        <div class="exp-group-title">Social Media</div>
+        <div class="exp-item">
+          <div class="exp-title">Research Asst. &amp; Social Media Coordinator</div>
+          <div class="exp-org">UWM Center for 21st Century Studies</div>
+          <div class="exp-dates">Spring 2023</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Social Media Content Creator &amp; Coordinator</div>
+          <div class="exp-org">UWM — JAMS Department</div>
+          <div class="exp-dates">Fall 2023</div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="exp-group-title">Professional</div>
+        <div class="exp-item">
+          <div class="exp-title">Warehouse Associate / Field Tech</div>
+          <div class="exp-org">Munger Technical Services</div>
+          <div class="exp-dates">May 2026 – Present</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Member Services Representative</div>
+          <div class="exp-org">Rakuten Rewards</div>
+          <div class="exp-dates">Oct 2023 – May 2026</div>
+        </div>
+        <br>
+        <div class="exp-group-title">Education</div>
+        <div class="exp-item">
+          <div class="exp-title">B.A. Digital Arts &amp; Culture</div>
+          <div class="exp-org">University of Wisconsin–Milwaukee</div>
+          <div class="exp-dates">Graduated May 2023</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Minor: Journalism, Advertising &amp; Media Studies</div>
+          <div class="exp-org">University of Wisconsin–Milwaukee</div>
+          <div class="exp-dates">Graduated May 2023</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Digital Arts &amp; Culture Student Council</div>
+          <div class="exp-org">UWM</div>
+          <div class="exp-dates">Sep 2022 – May 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume" class="section">
+  <div class="container">
+    <p class="section-label reveal">Full Resume</p>
+    <h2 class="section-title reveal">Resume</h2>
+    <div class="divider reveal"></div>
+    <div class="resume-wrap reveal">
+
+      <!-- Header -->
+      <div class="resume-header">
+        <div class="resume-name">Maxwell Friedl</div>
+        <div class="resume-contact-line">
+          <span>Milwaukee, WI</span>
+          <span>·</span>
+          <span>815-871-6564</span>
+          <span>·</span>
+          <a href="mailto:maxfriedl@gmail.com">maxfriedl@gmail.com</a>
+          <span>·</span>
+          <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio" target="_blank" rel="noopener">Portfolio</a>
+          <span>·</span>
+          <a href="https://www.linkedin.com/in/maxwell-friedl-898687205" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="resume-summary">
+        Creative professional with a background in digital media, internet culture, and content strategy. Experienced in video editing and image design using Adobe Premiere Pro and Photoshop, with hands-on work in social media content creation, live video production, and freelance design. Seeking a role where creativity, digital fluency, and media skills can be put to full use.
+      </div>
+
+      <!-- Skills -->
+      <div class="resume-section-head">Competencies &amp; Key Skills</div>
+      <ul class="resume-skills-grid">
+        <li>Social Media Strategy &amp; Content Creation</li>
+        <li>In touch with internet trends &amp; culture</li>
+        <li>Video Editing (Adobe Premiere Pro)</li>
+        <li>Team player, goal-driven, adaptable</li>
+        <li>Image Design (Adobe Photoshop, Illustrator)</li>
+        <li>Able to multitask and work under pressure</li>
+        <li>Canva</li>
+        <li>Computer proficiency</li>
+      </ul>
+
+      <!-- Education -->
+      <div class="resume-section-head">Education</div>
+      <div class="resume-job">
+        <div class="edu-line">
+          <span class="edu-school">University of Wisconsin–Milwaukee (UWM)</span>
+          <span class="edu-date">May 2023</span>
+        </div>
+        <div class="edu-degree">Bachelor's in Digital Arts and Culture &nbsp;|&nbsp; Minor in Journalism, Advertising, and Media Studies</div>
+      </div>
+
+      <!-- Current Experience -->
+      <div class="resume-section-head">Current Experience</div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Warehouse Associate / Assistant / Field Tech</span>
+          <span class="resume-job-dates">May 2026 – Present</span>
+        </div>
+        <div class="resume-job-org">Munger Technical Services — Milwaukee, WI</div>
+        <ul class="resume-bullets">
+          <li>Running cable for cameras, phones, and WiFi</li>
+          <li>Assisting with general warehouse tasks and shop operations</li>
+        </ul>
+      </div>
+
+      <!-- Video Production -->
+      <div class="resume-section-head">Video Production &amp; Editing Experience</div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Multimedia Assistant</span>
+          <span class="resume-job-dates">August 2021 – February 2023</span>
+        </div>
+        <div class="resume-job-org">University of Wisconsin–Milwaukee Athletics</div>
+        <ul class="resume-bullets">
+          <li>Operated cameras to stream and record volleyball, basketball, and soccer games on ESPN+</li>
+          <li>Operated the arena video board and big screen</li>
+          <li>Queued ESPN graphics on screen for live stream</li>
+          <li>Set up and broke down equipment for all games</li>
+        </ul>
+      </div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Video Editor — Crash Dummies Podcast</span>
+          <span class="resume-job-dates">March 2023 – April 2023</span>
+        </div>
+        <ul class="resume-bullets">
+          <li>Edited daily podcast clips for TikTok, Instagram Reels, and YouTube Shorts using Adobe Premiere Pro</li>
+          <li>Recorded podcast sessions for archiving and review</li>
+          <li>Featured on the podcast as an offscreen voice</li>
+          <li>Video edit reel: <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/podcast-edit-reel" target="_blank" rel="noopener">view here</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="resume-section-head">Social Media &amp; Content Creation Experience</div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Research Assistant &amp; Social Media Coordinator</span>
+          <span class="resume-job-dates">Spring 2023</span>
+        </div>
+        <div class="resume-job-org">UWM Center for 21st Century Studies</div>
+        <ul class="resume-bullets">
+          <li>Assisted in creating a semester-long social media plan</li>
+          <li>Presented plans for approval and incorporated revisions</li>
+          <li>Created posts across Facebook, Instagram, and Pinterest</li>
+        </ul>
+      </div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Social Media Content Creator &amp; Coordinator</span>
+          <span class="resume-job-dates">Fall 2023</span>
+        </div>
+        <div class="resume-job-org">UWM — Introduction to Social Media and SEO Course</div>
+        <ul class="resume-bullets">
+          <li>Developed a social media strategy plan for the Journalism, Advertising, and Media Studies accounts</li>
+          <li>Created and scheduled a variety of social media posts monthly</li>
+          <li>Researched and analyzed social media post statistics</li>
+          <li>Engaged with Milwaukee influencers on behalf of the JAMS social media accounts</li>
+          <li>Created a Facebook and Twitter advertisement for the JAMS accounts</li>
+        </ul>
+      </div>
+
+      <!-- Customer Service -->
+      <div class="resume-section-head">Customer Service Experience</div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Member Services Representative</span>
+          <span class="resume-job-dates">October 2023 – May 2026</span>
+        </div>
+        <div class="resume-job-org">Rakuten.com / Rakuten Rewards</div>
+        <ul class="resume-bullets">
+          <li>Responded to member emails regarding missing Cash Back</li>
+          <li>Added missing orders to member accounts</li>
+          <li>Re-issued missing checks and PayPal payments to members</li>
+          <li>Assisted with updating member mailing and email addresses</li>
+        </ul>
+      </div>
+
+      <!-- Freelance -->
+      <div class="resume-section-head">Freelance Work</div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Video Editing &amp; Image Design</span>
+          <span class="resume-job-dates">2016 – Present</span>
+        </div>
+        <ul class="resume-bullets">
+          <li>Designed YouTube thumbnails for friends and online influencers — <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/thumbnail-collection" target="_blank" rel="noopener">view collection</a></li>
+          <li>Designed logos, YouTube banners, cover art, and flyers — <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/freelance-work-1" target="_blank" rel="noopener">view freelance work</a></li>
+          <li>Edited gaming video highlight reels with music and clip placement</li>
+        </ul>
+      </div>
+
+      <!-- Additional -->
+      <div class="resume-section-head">Additional Experience</div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Arborist Assistant</span>
+          <span class="resume-job-dates">August 2022 – Present (Seasonal)</span>
+        </div>
+        <div class="resume-job-org">Cooper's Hawk Tree Care</div>
+        <ul class="resume-bullets">
+          <li>Assisted arborist with general landscaping and tree maintenance</li>
+        </ul>
+      </div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Banquet Server</span>
+          <span class="resume-job-dates">July 2021 – June 2022</span>
+        </div>
+        <div class="resume-job-org">Saz's Hospitality Group</div>
+        <ul class="resume-bullets">
+          <li>Served food at weddings, festivals, company events, and fundraisers</li>
+          <li>Attended to customer questions and concerns</li>
+          <li>Assisted with event setup and takedown</li>
+        </ul>
+      </div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Grill Cook</span>
+          <span class="resume-job-dates">September 2023 – October 2023</span>
+        </div>
+        <div class="resume-job-org">Chipotle Mexican Grill</div>
+        <ul class="resume-bullets">
+          <li>Operated grill and stovetop; prepared food before opening and throughout the day</li>
+        </ul>
+      </div>
+
+      <!-- Leadership -->
+      <div class="resume-section-head">Leadership &amp; Student Involvement</div>
+      <div class="resume-job">
+        <div class="resume-job-header">
+          <span class="resume-job-title">Digital Arts and Culture Student Council Member</span>
+          <span class="resume-job-dates">September 2022 – May 2023</span>
+        </div>
+        <div class="resume-job-org">University of Wisconsin–Milwaukee</div>
+        <ul class="resume-bullets">
+          <li>Contacted lead UWM website designer to communicate student council visions for site updates</li>
+          <li>Brainstormed and implemented strategies to recruit students for membership</li>
+          <li>Helped plan and host semesterly events for the Student Council</li>
+          <li>Represented the student organization at UWM fairs</li>
+        </ul>
+      </div>
+
+    </div><!-- end resume-wrap -->
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-inner">
+      <p class="section-label reveal">Let's Connect</p>
+      <h2 class="section-title reveal">Open to opportunities.<br>Say hello.</h2>
+      <p class="reveal">Whether you have a role, a project, or just want to connect — reach out anytime.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:maxfriedl@gmail.com" class="contact-link">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          maxfriedl@gmail.com
+        </a>
+        <a href="tel:8158716564" class="contact-link">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          815-871-6564
+        </a>
+        <a href="https://www.linkedin.com/in/maxwell-friedl-898687205" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Full Portfolio
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Maxwell Friedl &nbsp;·&nbsp; Milwaukee, WI &nbsp;·&nbsp; <a href="mailto:maxfriedl@gmail.com">maxfriedl@gmail.com</a></p>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    mobileNav.classList.toggle('open');
+  });
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileNav.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
