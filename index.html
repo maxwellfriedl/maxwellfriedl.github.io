@@ -552,9 +552,150 @@
     .exp-grid { grid-template-columns: 1fr; gap: 2rem; }
     .hero-bg-shape, .hero-bg-shape2 { display: none; }
   }
-  @media (max-width: 480px) {
-    .hero-ctas { flex-direction: column; }
-    .btn-primary, .btn-outline { text-align: center; }
+  /* card-link as button */
+  button.card-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: var(--font-body);
+  }
+
+  /* ── MODALS ────────────────────────────────────────── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 35, 0.78);
+    z-index: 200;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+  }
+  .modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
+  .modal-box {
+    background: var(--white);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 820px;
+    margin: auto;
+    overflow: hidden;
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--light);
+  }
+  .modal-header h3 {
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--midgray);
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: background 0.2s, color 0.2s;
+  }
+  .modal-close:hover { background: var(--border); color: var(--navy); }
+  .modal-body { padding: 2rem; }
+  .modal-desc {
+    font-size: 0.92rem;
+    color: var(--gray);
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+  .modal-video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .modal-placeholder {
+    background: var(--offwhite);
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 2.5rem;
+    text-align: center;
+    color: var(--midgray);
+    margin-bottom: 1.5rem;
+  }
+  .modal-placeholder .ph-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  .modal-placeholder p { font-size: 0.88rem; line-height: 1.65; max-width: 440px; margin: 0 auto; }
+  .modal-placeholder strong { color: var(--navy); display: block; margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .modal-gallery-item {
+    background: var(--offwhite);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .modal-gallery-item img {
+    width: 100%; display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  .modal-gallery-item .img-label {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    color: var(--midgray);
+  }
+  .modal-tags { margin-bottom: 1rem; }
+  .modal-tag {
+    display: inline-block;
+    background: var(--light);
+    color: var(--blue);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin: 0 4px 6px 0;
+  }
+  .modal-how-to {
+    background: var(--light);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.84rem;
+    color: var(--gray);
+    line-height: 1.65;
+  }
+  .modal-how-to strong { color: var(--navy); }
+  @media (max-width: 600px) {
+    .modal-header { padding: 1rem 1.25rem; }
+    .modal-body { padding: 1.25rem; }
+    .modal-gallery { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -612,7 +753,7 @@
     <div class="about-grid">
       <div class="about-text">
         <p class="section-label reveal">About Me</p>
-        <h2 class="section-title reveal">Digital Arts grad who lives<br>for creative work.</h2>
+        <h2 class="section-title reveal">About Me</h2>
         <div class="divider reveal"></div>
         <p class="reveal">
           I graduated from the University of Wisconsin–Milwaukee with a Bachelor's in
@@ -678,10 +819,10 @@
           Short-form video edits clipped from the Crash Dummies Podcast for TikTok,
           Instagram Reels, and YouTube Shorts — cut using Adobe Premiere Pro.
         </div>
-        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/podcast-edit-reel" target="_blank" rel="noopener" class="card-link">
+        <button class="card-link" onclick="openModal('modal-podcast')">
           View reel
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+        </button>
       </div>
 
       <div class="portfolio-card reveal reveal-delay-1">
@@ -691,10 +832,10 @@
           YouTube thumbnails designed for friends and online influencers using
           Adobe Photoshop and Illustrator — built to grab attention and drive clicks.
         </div>
-        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/thumbnail-collection" target="_blank" rel="noopener" class="card-link">
+        <button class="card-link" onclick="openModal('modal-thumbnails')">
           View thumbnails
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+        </button>
       </div>
 
       <div class="portfolio-card reveal reveal-delay-2">
@@ -704,10 +845,10 @@
           Logos, YouTube banners, cover art, and flyers designed for clients and friends
           since 2016 — a mix of Photoshop, Illustrator, and Canva projects.
         </div>
-        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/freelance-work-1" target="_blank" rel="noopener" class="card-link">
+        <button class="card-link" onclick="openModal('modal-freelance')">
           View freelance work
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+        </button>
       </div>
 
       <div class="portfolio-card reveal reveal-delay-3">
@@ -717,10 +858,10 @@
           Academic work from UWM's Digital Arts &amp; Culture program — covering digital
           storytelling, social media strategy, content creation, and more.
         </div>
-        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/student-projects" target="_blank" rel="noopener" class="card-link">
+        <button class="card-link" onclick="openModal('modal-student')">
           View projects
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+        </button>
       </div>
 
     </div>
@@ -859,7 +1000,7 @@
           <span>·</span>
           <a href="mailto:maxfriedl@gmail.com">maxfriedl@gmail.com</a>
           <span>·</span>
-          <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio" target="_blank" rel="noopener">Portfolio</a>
+          <a href="#portfolio">Portfolio</a>
           <span>·</span>
           <a href="https://www.linkedin.com/in/maxwell-friedl-898687205" target="_blank" rel="noopener">LinkedIn</a>
         </div>
@@ -931,7 +1072,7 @@
           <li>Edited daily podcast clips for TikTok, Instagram Reels, and YouTube Shorts using Adobe Premiere Pro</li>
           <li>Recorded podcast sessions for archiving and review</li>
           <li>Featured on the podcast as an offscreen voice</li>
-          <li>Video edit reel: <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/podcast-edit-reel" target="_blank" rel="noopener">view here</a></li>
+          <li>Edited short-form video reels for TikTok, Instagram Reels, and YouTube Shorts</li>
         </ul>
       </div>
 
@@ -988,8 +1129,8 @@
           <span class="resume-job-dates">2016 – Present</span>
         </div>
         <ul class="resume-bullets">
-          <li>Designed YouTube thumbnails for friends and online influencers — <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/thumbnail-collection" target="_blank" rel="noopener">view collection</a></li>
-          <li>Designed logos, YouTube banners, cover art, and flyers — <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio/freelance-work-1" target="_blank" rel="noopener">view freelance work</a></li>
+          <li>Designed YouTube thumbnails for friends and online influencers</li>
+          <li>Designed logos, YouTube banners, cover art, and flyers</li>
           <li>Edited gaming video highlight reels with music and clip placement</li>
         </ul>
       </div>
@@ -1069,9 +1210,9 @@
           <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           LinkedIn
         </a>
-        <a href="https://maxfriedl.wixsite.com/maxfriedlportfolio" target="_blank" rel="noopener" class="contact-link">
+        <a href="#portfolio" class="contact-link">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Full Portfolio
+          View Portfolio
         </a>
       </div>
     </div>
@@ -1081,6 +1222,180 @@
 <footer>
   <p>&copy; 2026 Maxwell Friedl &nbsp;·&nbsp; Milwaukee, WI &nbsp;·&nbsp; <a href="mailto:maxfriedl@gmail.com">maxfriedl@gmail.com</a></p>
 </footer>
+
+
+<!-- ── MODALS ───────────────────────────────────────────── -->
+
+<!-- Podcast Edit Reel -->
+<div class="modal-overlay" id="modal-podcast" onclick="handleOverlayClick(event, 'modal-podcast')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>🎬 Podcast Edit Reel</h3>
+      <button class="modal-close" onclick="closeModal('modal-podcast')" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc">
+        Short-form video edits clipped daily from the <strong>Crash Dummies Podcast</strong> (March–April 2023),
+        optimized for TikTok, Instagram Reels, and YouTube Shorts. Edited entirely in Adobe Premiere Pro —
+        focused on pacing, sound design, and keeping clips engaging within the first few seconds.
+      </div>
+      <div class="modal-tags">
+        <span class="modal-tag">Adobe Premiere Pro</span>
+        <span class="modal-tag">TikTok</span>
+        <span class="modal-tag">Instagram Reels</span>
+        <span class="modal-tag">YouTube Shorts</span>
+        <span class="modal-tag">Short-Form Video</span>
+      </div>
+      <div class="modal-placeholder">
+        <div class="ph-icon">🎥</div>
+        <p>
+          <strong>Add your video here</strong>
+          Upload your edit reel to YouTube, then paste the embed URL below to replace this placeholder.
+          See the how-to note at the bottom of this section.
+        </p>
+      </div>
+      <div class="modal-how-to">
+        <strong>How to add your video:</strong> Upload your reel to YouTube → click Share → Embed → copy the URL from the iframe src (looks like <em>https://www.youtube.com/embed/VIDEOID</em>). Then open index.html, find <em>modal-podcast</em>, and replace the placeholder div with:<br><br>
+        &lt;div class="modal-video-wrap"&gt;&lt;iframe src="YOUR_EMBED_URL" allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Thumbnail Collection -->
+<div class="modal-overlay" id="modal-thumbnails" onclick="handleOverlayClick(event, 'modal-thumbnails')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>🖼️ Thumbnail Collection</h3>
+      <button class="modal-close" onclick="closeModal('modal-thumbnails')" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc">
+        YouTube thumbnails designed for friends and online influencers using <strong>Adobe Photoshop</strong> and <strong>Illustrator</strong>.
+        Each thumbnail is built with click-through rate in mind — bold typography, strong contrast,
+        and visual hooks that make people stop scrolling.
+      </div>
+      <div class="modal-tags">
+        <span class="modal-tag">Adobe Photoshop</span>
+        <span class="modal-tag">Adobe Illustrator</span>
+        <span class="modal-tag">YouTube</span>
+        <span class="modal-tag">Graphic Design</span>
+      </div>
+      <div class="modal-gallery" id="gallery-thumbnails">
+        <!-- Images go here. Example of how each one should look:
+        <div class="modal-gallery-item">
+          <img src="images/thumb1.jpg" alt="Thumbnail 1">
+          <div class="img-label">Client name or description</div>
+        </div>
+        -->
+      </div>
+      <div class="modal-placeholder">
+        <div class="ph-icon">🖼️</div>
+        <p>
+          <strong>Add your thumbnail images here</strong>
+          Save your thumbnail files into a folder called <em>images</em> inside your GitHub repo,
+          then replace this placeholder with image tags. See the how-to note below.
+        </p>
+      </div>
+      <div class="modal-how-to">
+        <strong>How to add images:</strong> In your GitHub repo, click <em>Add file → Create new file</em>, type <em>images/thumb1.jpg</em> as the name, then upload. Repeat for each image. Then in index.html find <em>gallery-thumbnails</em> and add items like:<br><br>
+        &lt;div class="modal-gallery-item"&gt;&lt;img src="images/thumb1.jpg" alt="Description"&gt;&lt;div class="img-label"&gt;Label&lt;/div&gt;&lt;/div&gt;
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Freelance Design Work -->
+<div class="modal-overlay" id="modal-freelance" onclick="handleOverlayClick(event, 'modal-freelance')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>🎨 Freelance Design Work</h3>
+      <button class="modal-close" onclick="closeModal('modal-freelance')" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc">
+        Logos, YouTube channel banners, album and podcast cover art, and promotional flyers —
+        designed for friends, clients, and online creators since <strong>2016</strong>.
+        Tools used include <strong>Adobe Photoshop</strong>, <strong>Illustrator</strong>, and <strong>Canva</strong>
+        depending on the project needs.
+      </div>
+      <div class="modal-tags">
+        <span class="modal-tag">Logo Design</span>
+        <span class="modal-tag">YouTube Banners</span>
+        <span class="modal-tag">Cover Art</span>
+        <span class="modal-tag">Flyers</span>
+        <span class="modal-tag">Photoshop</span>
+        <span class="modal-tag">Illustrator</span>
+        <span class="modal-tag">Canva</span>
+      </div>
+      <div class="modal-gallery" id="gallery-freelance">
+        <!-- Images go here — same format as thumbnail gallery -->
+      </div>
+      <div class="modal-placeholder">
+        <div class="ph-icon">🎨</div>
+        <p>
+          <strong>Add your design work here</strong>
+          Upload your logos, banners, and flyers to the <em>images</em> folder in your GitHub repo,
+          then add them here the same way as the thumbnail gallery.
+        </p>
+      </div>
+      <div class="modal-how-to">
+        <strong>How to add images:</strong> Upload files to your GitHub <em>images/</em> folder, then in index.html find <em>gallery-freelance</em> and add:<br><br>
+        &lt;div class="modal-gallery-item"&gt;&lt;img src="images/logo1.jpg" alt="Description"&gt;&lt;div class="img-label"&gt;Project name&lt;/div&gt;&lt;/div&gt;
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Student Projects -->
+<div class="modal-overlay" id="modal-student" onclick="handleOverlayClick(event, 'modal-student')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>📚 Student Projects</h3>
+      <button class="modal-close" onclick="closeModal('modal-student')" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc">
+        Academic work from the University of Wisconsin–Milwaukee's <strong>Digital Arts &amp; Culture</strong> program
+        and the <strong>Journalism, Advertising &amp; Media Studies</strong> minor — spanning content strategy,
+        social media management, digital storytelling, and media production.
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-family:var(--font-head);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem;">Social Media Strategy — JAMS Dept. (Fall 2023)</div>
+        <p style="font-size:0.88rem;color:var(--gray);line-height:1.7;">
+          Developed a full social media strategy plan for the UWM Journalism, Advertising &amp; Media Studies department.
+          Created and scheduled monthly posts, researched engagement statistics, engaged with Milwaukee influencers,
+          and produced a Facebook and Twitter advertisement for the department's accounts.
+        </p>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-family:var(--font-head);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem;">Research &amp; Social Media Coordination — Center for 21st Century Studies (Spring 2023)</div>
+        <p style="font-size:0.88rem;color:var(--gray);line-height:1.7;">
+          Assisted in building a semester-long social media plan, presented strategy proposals to department leadership,
+          and created posts across Facebook, Instagram, and Pinterest.
+        </p>
+      </div>
+
+      <div class="modal-gallery" id="gallery-student">
+        <!-- Add screenshots of your student work here using the same image format -->
+      </div>
+
+      <div class="modal-placeholder">
+        <div class="ph-icon">📚</div>
+        <p>
+          <strong>Add screenshots of your student work here</strong>
+          Screenshots of posts, strategy decks, or any project files can be added
+          to the <em>images</em> folder and displayed here.
+        </p>
+      </div>
+      <div class="modal-how-to">
+        <strong>How to add images:</strong> Upload screenshots to your GitHub <em>images/</em> folder, then find <em>gallery-student</em> in index.html and add image items the same way as the other galleries.
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   // Nav scroll effect
@@ -1109,6 +1424,27 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Modal functions
+  function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e, id) {
+    if (e.target === document.getElementById(id)) closeModal(id);
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => {
+        m.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
 </script>
 </body>
 </html>
