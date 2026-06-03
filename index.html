@@ -10,16 +10,16 @@
 
   :root {
     --navy:   #1B3A5C;
-    --blue:   #2E6DA4;
-    --blue2:  #3d85c0;
-    --light:  #EAF2FB;
-    --light2: #d5e8f5;
+    --blue:   #1e8449;
+    --blue2:  #27ae60;
+    --light:  #e8f5ee;
+    --light2: #d1eade;
     --white:  #ffffff;
     --offwhite: #f8fafc;
     --gray:   #4a5568;
     --midgray:#718096;
-    --border: #d0dce8;
-    --rule:   #2E6DA4;
+    --border: #bfd9cb;
+    --rule:   #1e8449;
     --font-head: 'Syne', sans-serif;
     --font-body: 'DM Sans', sans-serif;
   }
@@ -651,7 +651,7 @@
   .modal-placeholder strong { color: var(--navy); display: block; margin-bottom: 0.4rem; font-size: 0.95rem; }
   .modal-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
@@ -907,6 +907,10 @@
         <span class="skill-icon">✂️</span>
         <span class="skill-name">Short-Form Video Editing</span>
       </div>
+      <div class="skill-item reveal">
+        <span class="skill-icon">🤖</span>
+        <span class="skill-name">AI Knowledge &amp; Experience</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1022,6 +1026,7 @@
         <li>Able to multitask and work under pressure</li>
         <li>Canva</li>
         <li>Computer proficiency</li>
+        <li>AI Knowledge &amp; Experience</li>
       </ul>
 
       <!-- Education -->
@@ -1248,13 +1253,8 @@
         <span class="modal-tag">Subtitles &amp; Captions</span>
         <span class="modal-tag">Short-Form Video</span>
       </div>
-      <div class="modal-placeholder">
-        <div class="ph-icon">🎥</div>
-        <p>
-          <strong>Video clips coming soon</strong>
-          To add your edited clips here, upload them to YouTube and paste the embed link in.
-          Each clip goes in a <code>modal-video-wrap</code> div — just ask for help when you're ready.
-        </p>
+      <div class="modal-video-wrap">
+        <iframe src="https://player.vimeo.com/video/824593362" title="Podcast Edit Reel" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -1327,25 +1327,25 @@
         <span class="modal-tag">Photoshop</span>
         <span class="modal-tag">Canva</span>
       </div>
-      <div class="modal-gallery">
+      <div class="modal-gallery" style="grid-template-columns: 1fr;">
         <div class="modal-gallery-item">
-          <img src="https://static.wixstatic.com/media/26e141_a532d994ba5a4629845d73ee17119254~mv2.png/v1/fill/w_484,h_484,q_90,enc_avif,quality_auto/26e141_a532d994ba5a4629845d73ee17119254~mv2.png" alt="Collins Cuts Logo" loading="lazy">
+          <img src="https://static.wixstatic.com/media/26e141_a532d994ba5a4629845d73ee17119254~mv2.png/v1/fill/w_720,h_720,q_90,enc_avif,quality_auto/26e141_a532d994ba5a4629845d73ee17119254~mv2.png" alt="Collins Cuts Logo" loading="lazy" style="aspect-ratio: auto; object-fit: contain; background: var(--offwhite);">
           <div class="img-label">Collins Cuts Logo — made in Photoshop for a friend starting a lawn care business</div>
         </div>
         <div class="modal-gallery-item">
-          <img src="https://static.wixstatic.com/media/26e141_c49ac2fe562c41cd900552e5d2c01935~mv2.jpg/v1/fill/w_484,h_626,q_90,enc_avif,quality_auto/26e141_c49ac2fe562c41cd900552e5d2c01935~mv2.jpg" alt="Collins Cuts Flyer" loading="lazy">
+          <img src="https://static.wixstatic.com/media/26e141_c49ac2fe562c41cd900552e5d2c01935~mv2.jpg/v1/fill/w_600,h_778,q_90,enc_avif,quality_auto/26e141_c49ac2fe562c41cd900552e5d2c01935~mv2.jpg" alt="Collins Cuts Flyer" loading="lazy" style="aspect-ratio: auto; object-fit: contain; background: var(--offwhite);">
           <div class="img-label">Collins Cuts Flyer — made in Canva</div>
         </div>
         <div class="modal-gallery-item">
-          <img src="https://static.wixstatic.com/media/26e141_881806db7917464c9d0a4d2417e8ad19~mv2.jpg/v1/fill/w_484,h_484,q_90,enc_avif,quality_auto/26e141_881806db7917464c9d0a4d2417e8ad19~mv2.jpg" alt="Rapper's Delight Logo" loading="lazy">
+          <img src="https://static.wixstatic.com/media/26e141_881806db7917464c9d0a4d2417e8ad19~mv2.jpg/v1/fill/w_720,h_720,q_90,enc_avif,quality_auto/26e141_881806db7917464c9d0a4d2417e8ad19~mv2.jpg" alt="Rapper's Delight Logo" loading="lazy" style="aspect-ratio: auto; object-fit: contain; background: var(--offwhite);">
           <div class="img-label">Rapper's Delight Profile Picture — logo for a friend's rap music podcast, made in Photoshop</div>
         </div>
         <div class="modal-gallery-item">
-          <img src="https://static.wixstatic.com/media/26e141_afeb93b0aead4f26b14ee63204ca099f~mv2.jpg/v1/fill/w_484,h_272,q_90,enc_avif,quality_auto/26e141_afeb93b0aead4f26b14ee63204ca099f~mv2.jpg" alt="Rapper's Delight YouTube Banner" loading="lazy">
+          <img src="https://static.wixstatic.com/media/26e141_afeb93b0aead4f26b14ee63204ca099f~mv2.jpg/v1/fill/w_720,h_405,q_90,enc_avif,quality_auto/26e141_afeb93b0aead4f26b14ee63204ca099f~mv2.jpg" alt="Rapper's Delight YouTube Banner" loading="lazy" style="aspect-ratio: auto; object-fit: contain; background: var(--offwhite);">
           <div class="img-label">Rapper's Delight YouTube Banner</div>
         </div>
         <div class="modal-gallery-item">
-          <img src="https://static.wixstatic.com/media/26e141_f7acde7440ee41b09d5c47153b2ef69c~mv2.jpg/v1/fill/w_484,h_484,q_90,enc_avif,quality_auto/26e141_f7acde7440ee41b09d5c47153b2ef69c~mv2.jpg" alt="Song Cover Art" loading="lazy">
+          <img src="https://static.wixstatic.com/media/26e141_f7acde7440ee41b09d5c47153b2ef69c~mv2.jpg/v1/fill/w_720,h_720,q_90,enc_avif,quality_auto/26e141_f7acde7440ee41b09d5c47153b2ef69c~mv2.jpg" alt="Song Cover Art" loading="lazy" style="aspect-ratio: auto; object-fit: contain; background: var(--offwhite);">
           <div class="img-label">Song Cover Art — made in Photoshop for a friend who started making music in high school</div>
         </div>
       </div>
